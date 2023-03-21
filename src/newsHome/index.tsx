@@ -1,11 +1,12 @@
 "use client";
 import React, { use, useEffect, useState } from 'react'
-import axios from 'axios';
+
 import { countries } from 'country-data';
 import Select from 'react-select'
 
 
 const subCategory = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology']
+
 
 
 const NewsHome = () => {
