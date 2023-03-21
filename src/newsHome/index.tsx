@@ -75,7 +75,7 @@ const NewsHome = () => {
 
 
  
-
+// code
   return (
     <>
       <section className='banner'>
