@@ -1,8 +1,9 @@
 "use client";
 import React, { use, useEffect, useState } from 'react'
-
 import { countries } from 'country-data';
 import Select from 'react-select'
+import react from 'react';
+import Link from 'next/link';
 
 
 const subCategory = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology']
@@ -17,9 +18,9 @@ const NewsHome = () => {
   const [countryCode, setCountryCode] = useState([])
   const [selectedCountry, setSelectedCountry] = useState<any>('')
   const [filterCodeCountry, setFilterCodeCountry] = useState('')
-  const [subCate,setSubCate]=useState<any>('')
-  const [searchInput,setSearchInput]=useState<any>('')
-  const [query,setQuery]=useState<any>('')
+  const [subCate, setSubCate] = useState<any>('')
+  const [searchInput, setSearchInput] = useState<any>('')
+  const [query, setQuery] = useState<any>('')
 
   useEffect(() => {
     const newArr: any = countries.all.map((item: any) => {
@@ -44,15 +45,15 @@ const NewsHome = () => {
   }
 
 
- 
+
 
   const handleChange = (event: any) => {
     setMessage(event.target.value);
   };
 
   console.log(query);
-  
-  
+
+
 
   const apiCall = async () => {
     const response = await fetch(`https://newsapi.org/v2/top-headlines/sources?q=${query}&category=${subCate}&country=${filterCodeCountry}&apiKey=c42423938e4642ccaaa9e356c1f6a7b7`)
@@ -68,15 +69,15 @@ const NewsHome = () => {
 
 
 
-  const handleChangeInput=(event:any)=>{
-    if(event.key='Enter'){
+  const handleChangeInput = (event: any) => {
+    if (event.key = 'Enter') {
       setQuery(searchInput)
     }
   }
 
 
- 
-// code
+
+  // code
   return (
     <>
       <section className='banner'>
@@ -92,12 +93,12 @@ const NewsHome = () => {
             <div className="categories">
               {subCategory.map((item) => {
                 return (
-                  <p className={item===subCate?"active":""} onClick={()=>{setSubCate(item)}}>{item}</p>
+                  <p className={item === subCate ? "active" : ""} onClick={() => { setSubCate(item) }}>{item}</p>
                 )
               })}
             </div>
             <div className="filter">
-              <input type="text" placeholder='type your search and enter' onChange={(e)=>{setSearchInput(e.target.value)}} onKeyDown={handleChangeInput}/>
+              <input type="text" placeholder='type your search and enter' onChange={(e) => { setSearchInput(e.target.value) }} onKeyDown={handleChangeInput} />
             </div>
           </div>
         </div>
@@ -109,8 +110,12 @@ const NewsHome = () => {
             currentData?.map((item: any, index: any) => {
               return (
                 <div key={item.id} className="column">
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
+                <Link href={`${item.url}`} className='linkContainer'>
+                
+                    <h3>{item.name}</h3>
+                    <p>{item.description}</p>
+                 
+                </Link>
                 </div>
               )
             })
